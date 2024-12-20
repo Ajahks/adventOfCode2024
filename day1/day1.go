@@ -10,6 +10,7 @@ import (
 )
 
 func RunDay1Problem() {
+    fmt.Println("Advent of Code 2024 - Day 1 Problem 1")
     inputs, err := readInputLists("day1/input/puzzle1Input")
     if err != nil {
         fmt.Println("Error parsing input: ", err)
@@ -19,7 +20,7 @@ func RunDay1Problem() {
     inputList2 := inputs[1]
 
     totalDistance := findTotalDistance(inputList1, inputList2)
-    fmt.Println("Solution 1:", totalDistance)
+    fmt.Println("Solution:", totalDistance)
 }
 
 /**
