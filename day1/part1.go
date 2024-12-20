@@ -8,7 +8,7 @@ import (
 
 func runPart1Problem() {
     fmt.Println("Problem 1 Start:")
-    inputs, err := util.ReadInputLists("day1/input/puzzle1Input")
+    inputs, err := util.ReadInputLists("input/day1/part1input")
     if err != nil {
         fmt.Println("Error parsing input: ", err)
         return
