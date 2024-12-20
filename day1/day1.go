@@ -1,25 +1,61 @@
 package day1
 
 import (
+    "bufio"
     "fmt"
     "math"
+    "os"
+    "strconv"
+    "strings"
 )
 
 func RunDay1Problem() {
-    inputList1 := []int{2, 1, 5, 6, 3, 12}
-    inputList2 := []int{0, 1, 2}
-    fmt.Println("Input list1:", inputList1)
-    fmt.Println("Input list2:", inputList2)
+    inputs, err := readInputLists("day1/input/puzzle1Input")
+    if err != nil {
+        fmt.Println("Error parsing input: ", err)
+        return
+    }
+    inputList1 := inputs[0]
+    inputList2 := inputs[1]
 
     totalDistance := findTotalDistance(inputList1, inputList2)
     fmt.Println("Solution 1:", totalDistance)
 }
 
+/**
+ * Reads input lists in format of vertical (columns) of lists
+ */
+func readInputLists(filepath string) ([][]int, error) {
+    file, err := os.Open(filepath)
+    if err != nil {
+        return nil, err
+    }
+    defer file.Close()
+
+    scanner := bufio.NewScanner(file)
+    scanner.Split(bufio.ScanLines)
+
+    lists := make([][]int, 0)
+    for scanner.Scan() {
+        text := scanner.Text()
+        values := strings.Fields(text)
+
+        // initialize lists if not already created
+        for len(lists) < len(values) {
+            lists = append(lists, make([]int, 0))
+        }
+
+        for i, value := range values {
+            intValue, _ := strconv.Atoi(value)
+            lists[i] = append(lists[i], intValue)
+        }
+    }
+    return lists, nil
+}
+
 func findTotalDistance(list1 []int, list2 []int) int {
     sortedList1 := mergeSort(list1)
     sortedList2 := mergeSort(list2)
-    fmt.Println("Sorted list1:", sortedList1)
-    fmt.Println("Sorted list2:", sortedList2)
 
     totalDistance := 0
     i := 0
