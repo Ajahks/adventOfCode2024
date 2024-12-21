@@ -7,8 +7,8 @@ import (
 	"strings"
 )
 
-// ReadInputLists - Reads input lists in format of vertical (columns) of lists
-func ReadInputLists(filepath string) ([][]int, error) {
+// ReadInputListsVertical - Reads input lists in format of vertical (columns) of lists
+func ReadInputListsVertical(filepath string) ([][]int, error) {
 	file, err := os.Open(filepath)
 	if err != nil {
 		return nil, err
@@ -32,6 +32,30 @@ func ReadInputLists(filepath string) ([][]int, error) {
 			intValue, _ := strconv.Atoi(value)
 			lists[i] = append(lists[i], intValue)
 		}
+	}
+	return lists, nil
+}
+
+// ReadInputListsHorizontal - Reads input lists in format of horizontal (rows) of lists
+func ReadInputListsHorizontal(filepath string) ([][]int, error) {
+	file, err := os.Open(filepath)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+
+	lists := make([][]int, 0)
+	for scanner.Scan() {
+		text := scanner.Text()
+		values := strings.Fields(text)
+		numList := make([]int, len(values))
+		for i, value := range values {
+			numList[i], _ = strconv.Atoi(value)
+		}
+		lists = append(lists, numList)
 	}
 	return lists, nil
 }

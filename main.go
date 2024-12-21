@@ -2,6 +2,7 @@ package main
 
 import (
     "adventOfCode2024/day1"
+    "adventOfCode2024/day2"
 )
 
 //TIP <p>To run your code, right-click the code and select <b>Run</b>.</p> <p>Alternatively, click
@@ -9,4 +10,5 @@ import (
 
 func main() {
     day1.RunDay1()
+    day2.RunDay2()
 }
