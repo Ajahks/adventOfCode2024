@@ -8,6 +8,7 @@ import (
 )
 
 func runPart1Problem() {
+    fmt.Println("Problem 1 Start:")
     input, err := util.ReadInputIntoSingleString("input/day3/day3input")
     if err != nil {
         fmt.Println("Error parsing input: ", err)
